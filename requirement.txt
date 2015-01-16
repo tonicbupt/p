@@ -6,7 +6,6 @@ Pillow
 Plim
 PyExecJS
 SQLAlchemy
-cropresize
 docutils
 markdown2
 pyScss
