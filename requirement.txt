@@ -11,3 +11,4 @@ markdown2
 pyScss
 python-magic
 stylus
+pyyaml
