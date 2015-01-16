@@ -2,7 +2,7 @@ appname: "p"
 port: 5000
 runtime: "python"
 build:
-    - "pip install -r ./requirement.txt"
+    - "pip install -r ./requirement.txt --index-url=https://pypi.python.org/simple/"
 cmd:
     - "python app.py"
 static: "static"
