@@ -12,3 +12,4 @@ pyScss
 python-magic
 stylus
 pyyaml
+mysql-python
