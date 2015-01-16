@@ -3,14 +3,13 @@
 import os
 import uuid
 import magic
-import Image
 import urllib
-import cropresize
 from random import choice
 from string import digits
 from string import ascii_uppercase
 from string import ascii_lowercase
 from datetime import datetime
+from PIL import Image
 
 from flask import abort
 from flask import Flask
@@ -88,7 +87,7 @@ class PasteFile(db.Model):
     def create_file_after_crop(cls, uploadedFile, width, height):
         assert uploadedFile.is_image, TypeError("Unsupported Image Type.")
 
-        img      = cropresize.crop_resize(Image.open(uploadedFile), (int(width), int(height)))
+        img      = Image.open(uploadedFile).resize(int(width), int(height))
         rst      = cls(uploadedFile.filename, uploadedFile.mimetype, 0)
         img.save(rst.path)
 
@@ -143,7 +142,7 @@ class PasteFile(db.Model):
     def rsize(cls, oldPaste, weight, height):
         assert oldPaste.is_image
 
-        img = cropresize.crop_resize(Image.open(oldPaste.path), (int(weight), int(height)))
+        img = Image.open(oldPaste.path).resize(int(weight), int(height))
 
         return cls.create_by_img(img, oldPaste.filename, oldPaste.mimetype)
 

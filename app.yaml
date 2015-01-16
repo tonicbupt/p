@@ -1,13 +1,8 @@
-application: p
-version: 1
-runtime: python
-api_version: 1
-release_managers: qingfeng
-
-handlers:
-- url: /i/(.*)
-  static_files: permdir/\1
-  upload: permdir/.*
-
-- url: /.*
-  wsgi_app: app:app
+appname: "p"
+port: 5000
+runtime: "python"
+build:
+    - "pip install -r ./requirement.txt"
+cmd:
+    - "python app.py"
+static: "static"
