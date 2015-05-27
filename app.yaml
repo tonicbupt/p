@@ -1,7 +1,7 @@
 appname: "p"
 entrypoints:
     web:
-        cmd: "gunicorn app:app -b 0.0.0.0:5000 -k gevent"
+        cmd: "gunicorn app:app -b 0.0.0.0:5000"
         ports:
             - "5000/tcp"
 build:
