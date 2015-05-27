@@ -27,7 +27,7 @@ from mimes import VIDEO_MIMES
 
 RANDOM_SEQ = ascii_uppercase + ascii_lowercase + digits
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config.from_object("config")
 if app.config["DEBUG"]:
     from werkzeug import SharedDataMiddleware

@@ -1,8 +1,8 @@
 appname: "p"
-port: 5000
-runtime: "python"
+entrypoints:
+    web:
+        cmd: "gunicorn app:app -b 0.0.0.0:5000 -k gevent"
+        ports:
+            - "5000/tcp"
 build:
-    - "rm -rf /.pip && pip install -r ./requirement.txt --index-url=https://pypi.python.org/simple/"
-cmd:
-    - "python app.py"
-static: "static"
+    - "pip install -r ./requirement.txt"

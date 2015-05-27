@@ -13,3 +13,4 @@ python-magic
 stylus
 pyyaml
 mysql-python
+gunicorn

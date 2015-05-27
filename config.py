@@ -4,26 +4,34 @@
 
 
 import os
-import yaml
 import tempfile
 from plim import preprocessor
 
-
-def load_config():
-    with open('config.yaml', 'r') as f:
-        return yaml.load(f)
-
-
 def load_upload_dir():
-    d = os.getenv('NBE_PERMDIR', '')
-    if not d:
-        return tempfile.mkdtemp()
-    return d
+    d = os.getenv('ERU_PERMDIR', '')
+    if d:
+        return d
+    return tempfile.mkdtemp()
 
+DEBUG = bool(os.getenv('DEBUG', ''))
 
-DEBUG = True
+MYSQL_HOST = os.getenv('MYSQL_HOST', 'localhost')
+MYSQL_PORT = int(os.getenv('MYSQL_PORT', '3306'))
+MYSQL_USER = os.getenv('MYSQL_USER', 'root')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
+MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'p')
+
 MAX_CONTENT_LENGTH = 32 * 1024 * 1024
+
 MAKO_PREPROCESSOR = preprocessor
 MAKO_TRANSLATE_EXCEPTIONS = False
+
 UPLOAD_FOLDER = load_upload_dir()
-SQLALCHEMY_DATABASE_URI = 'mysql://{username}:{password}@{host}:{port}/{db}'.format(**load_config()['mysql'])
+
+SQLALCHEMY_DATABASE_URI = 'mysql://{0}:{1}@{2}:{3}/{4}'.format(
+    MYSQL_USER,
+    MYSQL_PASSWORD,
+    MYSQL_HOST,
+    MYSQL_PORT,
+    MYSQL_DATABASE,
+)
